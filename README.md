@@ -18,10 +18,10 @@ Alpine Linux 兼容的 Cloudflare 动态域名解析脚本，支持 IPv4/IPv6，
 
 ```bash
 apk add curl
-2. 下载脚本
+### 2. 下载脚本
 curl -o /usr/local/bin/alpine_cf-ddns.sh https://raw.githubusercontent.com/blassck/alpine_cf-ddns/refs/heads/main/alpine_cf-ddns.sh
 chmod +x /usr/local/bin/alpine_cf-ddns.sh
-3. 编辑配置
+### 3. 编辑配置
 vi /usr/local/bin/alpine_cf-ddns.sh
 修改以下配置项：
 # 方式一：使用 API Token（推荐，更安全）
@@ -42,8 +42,8 @@ CFRECORD_TYPE="A"                   # A(IPv4) 或 AAAA(IPv6)
 3.	使用模板 “Edit zone DNS” 或手动创建权限：
 –	Zone:Read（读取区域信息）
 –	DNS:Edit（编辑 DNS 记录）
-4.	Zone Resources: Include - Specific zone - your-domain.com
-5.	复制生成的 Token，填入脚本的 CFTOKEN 变量
+### 4.	Zone Resources: Include - Specific zone - your-domain.com
+### 5.	复制生成的 Token，填入脚本的 CFTOKEN 变量
 使用方法
 手动运行
 # 使用配置文件中的参数
@@ -124,7 +124,7 @@ IP 验证	无	正则格式校验
 日志	stdout	文件日志 + stdout
 IPv6	支持	支持
 开源协议
-MIT License
+### MIT License
 致谢
 基于 yulewang/cloudflare-api-v4-ddns 改编，适配 Alpine Linux。 ```
 这个 Markdown 文档包含了： - 完整的安装配置指南 - API Token 获取步骤 - 命令行参数说明 - Cron 定时任务设置 - 日志查看方法 - IPv6 配置 - 故障排查 - 与原版脚本的对比
