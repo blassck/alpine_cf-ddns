@@ -19,10 +19,10 @@ Alpine Linux 兼容的 Cloudflare 动态域名解析脚本，支持 IPv4/IPv6，
 ```bash
 apk add curl
 2. 下载脚本
-curl -o /usr/local/bin/cf-ddns.sh https://raw.githubusercontent.com/your-repo/cf-ddns-alpine.sh
-chmod +x /usr/local/bin/cf-ddns.sh
+curl -o /usr/local/bin/alpine_cf-ddns.sh https://raw.githubusercontent.com/blassck/alpine_cf-ddns/refs/heads/main/alpine_cf-ddns.sh
+chmod +x /usr/local/bin/alpine_cf-ddns.sh
 3. 编辑配置
-vi /usr/local/bin/cf-ddns.sh
+vi /usr/local/bin/alpine_cf-ddns.sh
 修改以下配置项：
 # 方式一：使用 API Token（推荐，更安全）
 CFTOKEN="your-api-token-here"
@@ -47,13 +47,13 @@ CFRECORD_TYPE="A"                   # A(IPv4) 或 AAAA(IPv6)
 使用方法
 手动运行
 # 使用配置文件中的参数
-/usr/local/bin/cf-ddns.sh
+/usr/local/bin/alpine_cf-ddns.sh
 
 # 强制更新（无视 IP 是否变化）
-/usr/local/bin/cf-ddns.sh -f true
+/usr/local/bin/alpine_cf-ddns.sh -f true
 
 # 命令行传入参数（覆盖配置文件）
-/usr/local/bin/cf-ddns.sh -t "your-token" -h "sub.example.com" -z "example.com"
+/usr/local/bin/alpine_cf-ddns.sh -t "your-token" -h "sub.example.com" -z "example.com"
 命令行参数
 参数	说明	示例
 -k	Global API Key	-k 1234567890abcdef
@@ -67,10 +67,10 @@ CFRECORD_TYPE="A"                   # A(IPv4) 或 AAAA(IPv6)
 crontab -e
 
 # 每 5 分钟检查一次（推荐）
-*/5 * * * * /usr/local/bin/cf-ddns.sh >/dev/null 2>&1
+*/5 * * * * /usr/local/bin/ >/dev/null 2>&1
 
 # 或带日志记录
-*/5 * * * * /usr/local/bin/cf-ddns.sh >> /var/log/cf-ddns.log 2>&1
+*/5 * * * * /usr/local/bin/alpine_cf-ddns.sh >> /var/log/cf-ddns.log 2>&1
 查看日志
 # 实时查看
 tail -f /var/log/cf-ddns.log
@@ -92,7 +92,7 @@ tail -n 50 /var/log/cf-ddns.log
 [2024-01-15 09:05:04] ✓ DNS 更新成功: ddns.example.com -> 203.0.113.88
 文件说明
 文件路径	说明
-/usr/local/bin/cf-ddns.sh	脚本主体
+/usr/local/bin/alpine_cf-ddns.shh	脚本主体
 /root/.cf-wan_ip_<hostname>.txt	上次更新的 IP 缓存
 /root/.cf-id_<hostname>.txt	Zone ID 和 Record ID 缓存
 /var/log/cf-ddns.log	运行日志
@@ -101,7 +101,7 @@ IPv6 支持
 CFRECORD_TYPE="AAAA"
 WANIPSITE="https://ipv6.icanhazip.com"
 或使用命令行参数：
-/usr/local/bin/cf-ddns.sh -t "token" -h "ipv6.example.com" -z "example.com"
+/usr/local/bin/alpine_cf-ddns.sh -t "token" -h "ipv6.example.com" -z "example.com"
 # 然后修改脚本内 CFRECORD_TYPE="AAAA"
 故障排查
 DNS 解析错误
@@ -110,7 +110,7 @@ echo "nameserver 223.5.5.5" > /etc/resolv.conf
 echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 权限错误
 确保脚本可执行：
-chmod +x /usr/local/bin/cf-ddns.sh
+chmod +x /usr/local/bin/alpine_cf-ddns.sh
 API 认证失败
 检查 Token/Key 是否正确，Token 需要以下权限： - Zone:Read - DNS:Edit
 找不到记录
